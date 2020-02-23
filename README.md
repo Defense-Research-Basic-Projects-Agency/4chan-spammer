@@ -12,6 +12,7 @@ shill.post({
     thread: '821267558',
     token: 2-captcha-token,
     comment: 'original comment',
+    file: 'image.png',
     captchaTick: () => {
       console.log('CAPCHA_NOT_READY')
     }
