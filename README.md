@@ -15,9 +15,9 @@ shill.post({
     captchaTick: () => {
       console.log('CAPCHA_NOT_READY')
     }
-  }).then(r => {
-          console.log(r); // Returns posted thread
-      }).catch(e => {
-        console.log(e)
-      })
+}).then(r => {
+    console.log(r); // Returns posted thread
+}).catch(e => {
+    console.log(e)
+})
 ```
