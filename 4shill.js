@@ -53,6 +53,7 @@ function submitRequest(params)
   })
   */
   return new Promise((resolve, reject) => {
+
     var form = new FormData();
     form.append('g-recaptcha-response', params.token)
     form.append('mode', 'regist')
@@ -62,35 +63,20 @@ function submitRequest(params)
 
     if (params.file)
     {
-      const fileSizeInBytes = stats.size;
       const fileStream = fs.createReadStream(params.file);
       form.append('upfile', fileStream, {
-        filename: params.file, // ... or:
+        "filename": path.basename(params.file), // ... or:
         //filepath: params.file,
-        contentType: mime.contentType(path.extname(params.file)),
+        "Content-Type": mime.contentType(path.extname(params.file)),
         //knownLength: fileSizeInBytes
       })
     }
-    /*
-    form = {
-        resto: options.thread,
-        'g-recaptcha-response': body.request,
-        mode: 'regist',
-        com: options.comment,
-        upfile: ((options.file) ? {
-          value: fs.createReadStream(options.file),
-          options: {
-            filename: options.file,
-            contentType: mime.contentType(path.extname(options.file))
-            }
-          } : '' )
-    }
-    */
     fetch(
       `https://sys.4chan.org/${params.board}/post`,{
         method: 'post',
        headers: {
            Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+       //    "Content-Type": "multipart/form-data; boundary=---------------------------274092578425312",
            Origin: 'https://boards.4chan.org',
            Referer: 'https://boards.4chan.org/',
            Host: 'sys.4chan.org',
@@ -295,7 +281,7 @@ function post(params)
       return submitRequest({
         token: code,
         comment: params.comment,
-    //    file: "file.png",
+        file: params.file,
         thread: params.thread,
         board: params.board
       })
