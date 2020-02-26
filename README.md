@@ -10,7 +10,7 @@ var shill = require('./4shill.js')
 shill.post({
     board: 'b',
     thread: '821267558',
-    token: 2-captcha-token,
+    token: 'special token uwu',
     comment: 'original comment',
     file: 'image.png',
     captchaTick: () => {
